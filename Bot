@@ -1,0 +1,90 @@
+#!/usr/bin/python3
+
+import alpaca_trade_api as tradeapi
+import time
+
+print("\033c")
+
+def time_to_market_close():
+    clock = api.get_clock()
+    return (clock.next_close - clock.timestamp).total_seconds()
+
+
+def wait_for_market_open():
+    clock = api.get_clock()
+    if not clock.is_open:
+        print("Sleeping...")
+        time_to_open = (clock.next_open - clock.timestamp).total_seconds()
+        time.sleep(round(time_to_open))
+
+key = "my_key"
+sec = "my_sec_key"
+
+url = "https://paper-api.alpaca.markets"
+
+api = tradeapi.REST(key, sec, url, api_version='v2')
+
+account = api.get_account()
+
+print(account.status)
+
+while True:
+    a = time_to_market_close()
+    wait_for_market_open()
+    if a > 120:
+        symbol = "AAPL"
+        while True:
+            barset = api.get_barset(symbol, "minute",)
+            aapl_bars = barset[symbol]
+            minute_open = aapl_bars[0].o
+            minute_open2 = aapl_bars[-1].o
+            percent_change = (minute_open2 - minute_open) / minute_open * 100
+
+            position = api.get_position("AAPL")
+            print()
+            print(f"Current balance: ${account.equity}")
+            print(f"You have {position.qty} shares of " + symbol)
+            print()
+            time1 = str(time)
+
+            if percent_change >= 0.3 and int(position.qty) > 1:
+                sellorder = api.submit_order(
+                                symbol=symbol,
+                                qty="500",
+                                side="sell",
+                                type="limit",
+                                limit_price=str(minute_open),
+                                time_in_force="day",
+                            )
+                update = open("updates.txt", "a") #You would have another .txt file named updates in the same folder, desktop, etc.
+                update.write("\n" + time1 + f": Sherman sold 500 shares of " + symbol + " for {minute_open} each.")
+                update.close()
+
+                print(f"Sherman sold 500 shares of " + symbol + " for {minute_open} each.")
+
+             elif percent_change <= -0.3 and int(position.qty) == 1:
+                 buyorder = api.submit_order(
+                                 symbol=symbol,
+                                 qty="500",
+                                 side="buy",
+                                 type="limit",
+                                 limit_price=str(minute_open),
+                                 time_in_force="day",
+                             )
+                 update1 = open("updates.txt", "a")
+                 update1.write("\n" + time1 + f": Sherman bought 500 shares of " + symbol + " for {minute_open} each.")
+                 update1.close()
+
+                 print(f"Sherman bought 500 shares of " + symbol + " for {minute_open} each.")
+
+             else:
+                 print("Sherman did not sell nor buy any shares.")
+
+             time.sleep(60)
+
+         updates = open("updates.txt", "r")
+         lines = updates.readlines()
+         for line in lines:
+             count += 1
+             print(f"Line {count}: {line.strip}")
+         wait_for_market_open()
