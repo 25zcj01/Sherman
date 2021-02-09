@@ -58,7 +58,7 @@ while True:
                 print(f"You have {position.qty} shares of " + symbol)
             time1 = str(time)
 
-            if percent_change >= 0.5 and int(position.qty) > 1:
+            if percent_change >= 0.5 and int(position.qty) == 501:
                 sellorder = api.submit_order(
                                 symbol=symbol,
                                 qty="500",
