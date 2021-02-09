@@ -40,11 +40,22 @@ while True:
             minute_open2 = aapl_bars[-1].o
             percent_change = (minute_open2 - minute_open) / minute_open * 100
 
-            position = api.get_position("AAPL")
-            print()
-            print(f"Current balance: ${account.equity}")
-            print(f"You have {position.qty} shares of " + symbol)
-            print()
+            try:
+                position = api.get_position("AAPL")
+                print(f"Current balance: ${account.equity}")
+                print(f"You have {position.qty} shares of " + symbol)
+            except:
+                api.submit_order(
+                            symbol=symbol,
+                            qty="1",
+                            side="buy",
+                            type="limit",
+                            limit_price=str(minute_open),
+                            time_in_force="day"
+                       )
+                time.sleep(10)
+                print(f"Current balance: ${account.equity}")
+                print(f"You have {position.qty} shares of " + symbol)
             time1 = str(time)
 
             if percent_change >= 0.3 and int(position.qty) > 1:
@@ -54,7 +65,7 @@ while True:
                                 side="sell",
                                 type="limit",
                                 limit_price=str(minute_open),
-                                time_in_force="day",
+                                time_in_force="day"
                             )
                 update = open("updates.txt", "a") #You would have another .txt file named updates in the same folder, desktop, etc.
                 update.write("\n" + time1 + f": Sherman sold 500 shares of " + symbol + " for {minute_open} each.")
