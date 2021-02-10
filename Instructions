@@ -42,3 +42,8 @@ Step 11:
 
 Step 12:
   And you should be all set just run the script.
+  
+  
+  
+Instructions for MSherman:
+  Basicly the same thing as above just change the stockname variables to your stocks, the stockqty to the qty of your stocks, and the percent to the eprcent you want.
