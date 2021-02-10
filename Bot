@@ -62,8 +62,7 @@ while True:
                                 symbol=symbol,
                                 qty="500",
                                 side="sell",
-                                type="limit",
-                                limit_price=str(minute_open),
+                                type="market",
                                 time_in_force="day"
                             )
                 update = open("updates.txt", "a") #You would have another .txt file named updates in the same folder, desktop, etc.
@@ -77,8 +76,7 @@ while True:
                                  symbol=symbol,
                                  qty="500",
                                  side="buy",
-                                 type="limit",
-                                 limit_price=str(minute_open),
+                                 type="market",
                                  time_in_force="day",
                              )
                  update1 = open("updates.txt", "a")
