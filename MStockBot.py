@@ -19,8 +19,8 @@ def wait_for_market_open():
         time_to_open = (clock.next_open - clock.timestamp).total_seconds()
         time.sleep(round(time_to_open))
 
-key = "PK2P12ROLE6LIA05JY6J"
-sec = "vwvgzVycMzVaAw95xWL6WA8UbkHBupJy3HmRuwTi"
+key = "my_key"
+sec = "my_sec_key"
 
 url = "https://paper-api.alpaca.markets"
 
