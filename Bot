@@ -49,8 +49,7 @@ while True:
                             symbol=symbol,
                             qty="1",
                             side="buy",
-                            type="limit",
-                            limit_price=str(minute_open),
+                            type="market",
                             time_in_force="day"
                        )
                 time.sleep(10)
