@@ -38,9 +38,11 @@ while True:
         symbols = ["FB", "AAPL", "GOOG"]
         stockqty = ["30", "50", "20"]
         percent = 0.5
+        percentN = -0.5
         count = 0
         while True:
-            for i in range(1, len(symbols)):
+            n = 0
+            for i in range(len(symbols)):
                 barset = api.get_barset(symbols[n], "minute",)
                 symbols_bars = barset[symbols[n]]
                 minute_open = symbols_bars[0].o
@@ -66,7 +68,7 @@ while True:
                     
                 time1 = str(time)
 
-                if percent_change >= percent and position.qty == (int(stockqty[n]) + 1):
+                if int(percent_change) >= percent and int(position.qty) == (int(stockqty[n]) + 1):
                     api.submit_order(
                                 symbol=symbols[n],
                                 qty=stockqty[n],
@@ -75,13 +77,13 @@ while True:
                                 time_in_force="day"
                             )
                     update = open("Mupdates.txt", "a")
-                    update.write("\n" + time1 + f"MSherman sold {stockqty[n]} of " + symbols[n] + " for {minute_open} each.")
-                                        update.close()
+                    update.write("MSherman sold " + stockqty[n] + " of " + symbols[n] + " for " + minute_open + " each.")
+                    update.close()
 
-                    print(f"MSherman sold {stockqty[n]} of " + symbols[n] + " for {minute_open} each.")
+                    print("MSherman sold " + stockqty[n] + " of " + symbols[n] + " for " + minute_open + " each.")
                     print()
 
-                elif percent_change <= (percent * -1) and int(position.qty) == 1:
+                elif int(percent_change) <= percentN and int(position.qty) == 1:
                     api.submit_order(
                                 symbol=symbols[n],
                                 qty=stockqty[n],
@@ -90,21 +92,14 @@ while True:
                                 time_in_force="day",
                             )
                     update = open("Mupdates.txt", "a")
-                    update.write("\n" + time1 + f"MSherman sold {stockqty[n]} of " + symbols[n] + " for {minute_open} each.")
+                    update.write("MSherman bought " + stockqty[n] + " of " + symbols[n] + " for " + minute_open + " each.")
                     update.close()
 
-                    print(f"MSherman sold {stockqty[n]} of " + symbols[n] + " for {minute_open} each.")
+                    print("MSherman bought " + stockqty[n] + " of " + symbols[n] + " for " + minute_open + " each.")
                     print()
-
-                else:
-                    print("MSherman did not sell nor buy any shares.")
-                    print()
-
-                if n == (len(symbols) - 1):
-                    n = 0
-                else:
-                    n += 1
-                time.sleep(15)
+                    
+                n += 1
+                time.sleep(10)
 
         updates = open("Mupdates.txt", "r")
         lines = upadtes.readlines()
