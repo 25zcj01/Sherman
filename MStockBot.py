@@ -68,7 +68,7 @@ while True:
                     
                 time1 = str(time)
 
-                if int(percent_change) >= percent and int(position.qty) == (int(stockqty[n]) + 1):
+                if int(round(percent_change, 2)) >= percent and int(position.qty) == (int(stockqty[n]) + 1):
                     api.submit_order(
                                 symbol=symbols[n],
                                 qty=stockqty[n],
@@ -83,7 +83,7 @@ while True:
                     print("MSherman sold " + stockqty[n] + " of " + symbols[n] + " for " + minute_open + " each.")
                     print()
 
-                elif int(percent_change) <= percentN and int(position.qty) == 1:
+                elif int(round(percent_change, 2) <= percentN and int(position.qty) == 1:
                     api.submit_order(
                                 symbol=symbols[n],
                                 qty=stockqty[n],
