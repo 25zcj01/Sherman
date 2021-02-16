@@ -38,7 +38,7 @@ while True:
         symbols = ["FB", "AAPL", "GOOG"]
         stockqty = ["30", "50", "20"]
         percent = 0.5
-        percentN = -0.5
+        percentN = -percent
         count = 0
         while True:
             n = 0
