@@ -64,11 +64,7 @@ while True:
                                     time_in_force="day"
                                 )
                         time.sleep(10)
-                    position = api.get_position("AAPL")
-                    print(f"Current balance: ${account.equity}")
-                    print(f"You have {position.qty} shares of " + symbols[n])
-                    
-                time1 = str(time)
+                        position = api.get_position(symbols[n])
 
                 if int(round(percent_change, 2)) >= percent and int(position.qty) == (int(stockqty[n]) + 1):
                     api.submit_order(
@@ -78,12 +74,6 @@ while True:
                                 type="market",
                                 time_in_force="day"
                             )
-                    update = open("Mupdates.txt", "a")
-                    update.write("MSherman sold " + stockqty[n] + " of " + symbols[n] + " for " + minute_open + " each.")
-                    update.close()
-
-                    print("MSherman sold " + stockqty[n] + " of " + symbols[n] + " for " + minute_open + " each.")
-                    print()
 
                 elif int(round(percent_change, 2) <= percentN and int(position.qty) == 1:
                     api.submit_order(
@@ -93,20 +83,10 @@ while True:
                                 type="market",
                                 time_in_force="day",
                             )
-                    update = open("Mupdates.txt", "a")
-                    update.write("MSherman bought " + stockqty[n] + " of " + symbols[n] + " for " + minute_open + " each.")
-                    update.close()
-
-                    print("MSherman bought " + stockqty[n] + " of " + symbols[n] + " for " + minute_open + " each.")
-                    print()
                     
                 n += 1
-                time.sleep(10)
-
-        updates = open("Mupdates.txt", "r")
-        lines = upadtes.readlines()
-        for line in lines:
-            count += 1
-            print(f"Line {count}: " + line.strip())
+                time.sleep(25)
+                         
+        print("\033c")
         wait_for_market_open()
                     
