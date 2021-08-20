@@ -3,40 +3,38 @@
 
 ## Instructions for Sherman:
 
-  1. Go to: https://alpaca.markets to create an account
+ 1. Go to: https://alpaca.markets to create an account
   
 
-  2. Go into your terminal and type: "pip install alpaca-trade-api"
+ 2. Go into your terminal and type: "pip install alpaca-trade-api"
 
 
-  3. Copy and paste the code into your text editor, notepad, etc.
+ 3. Copy and paste the code into your text editor, notepad, etc.
 
 
-  4. Log into you account on Alpaca, and click on the View button next to the text that says: "Your API keys"
+ 4. Log into you account on Alpaca, and click on the View button next to the text that says: "Your API keys"
 
 
-  5. Take the key and paste it into the quotes in the code that says "my_key", do the same for your secret key with "my_sec_key".
+ 5. Take the key and paste it into the quotes in the code that says "my_key", do the same for your secret key with "my_sec_key".
 
 
-  6. Change the "symbol" variable in the code from "AAPL" to whatever stock you would like to trade with.
+ 6. Change the "symbol" variable in the code from "AAPL" to whatever stock you would like to trade with.
 
 
-  7. Change the "qty" variable in the code to how much you would like to buy and sell of your stock.
+ 7. Change the "qty" variable in the code to how much you would like to buy and sell of your stock.
 
 
-  8. Create a .txt file named "updates" in the same directory of file you saved your code in.
+ 8. Create a .txt file named "updates" in the same directory of file you saved your code in.
 
 
-  9. In the "position" variable change "AAPL" to your stock name.
+ 9. In the "position" variable change "AAPL" to your stock name.
 
 
-  10. 
-
-  In the line that says `if percent_change >= 0.5 and int(position.qty) == 501:` change `0.5` to the percent you would like to buy and sell at, and `501` to your qty + 1. 
+10. In the line that says `if percent_change >= 0.5 and int(position.qty) == 501:` change `0.5` to the percent you would like to buy and sell at, and `501` to your qty + 1. 
   In the line that says `elif percent_change <= -0.5 and int(position.qty) == 1:` change `-0.5` to what you changed `0.5` above but negative.
 
 
-  11. In this snippet of code:
+11. In this snippet of code:
   
     update1.write("\n" + time1 + f": Sherman bought 500 shares of " + symbol + " for {minute_open} each.")
         update1.close()
