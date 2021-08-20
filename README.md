@@ -32,17 +32,17 @@
 
   10. 
 
-    In the line that says: `if percent_change >= 0.5 and int(position.qty) == 501:` change `0.5` to the percent you would like to buy and sell at, and `501` to your qty + 1. 
-    In the line that says: `elif percent_change <= -0.5 and int(position.qty) == 1:` change `-0.5` to what you changed `0.5` above but negative.
+  In the line that says `if percent_change >= 0.5 and int(position.qty) == 501:` change `0.5` to the percent you would like to buy and sell at, and `501` to your qty + 1. 
+  In the line that says `elif percent_change <= -0.5 and int(position.qty) == 1:` change `-0.5` to what you changed `0.5` above but negative.
 
 
   11. In this snippet of code:
   
-    ```update1.write("\n" + time1 + f": Sherman bought 500 shares of " + symbol + " for {minute_open} each.")
-                   update1.close()
+    update1.write("\n" + time1 + f": Sherman bought 500 shares of " + symbol + " for {minute_open} each.")
+        update1.close()
 
-                   print(f"Sherman bought 500 shares of " + symbol + " for {minute_open} each.")
-```                 
+        print(f"Sherman bought 500 shares of " + symbol + " for {minute_open} each.")
+         
    
    Change `500` to the qty you are buying and selling, you need to do this twice since there is an if statement with this, and an elif statement as well.
 
