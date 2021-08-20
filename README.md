@@ -36,12 +36,12 @@
 
 11. In this snippet of code:
 
-    ```python
-       update1.write("\n" + time1 + f": Sherman bought 500 shares of " + symbol + " for {minute_open} each.")
-           update1.close()
+```python
+   update1.write("\n" + time1 + f": Sherman bought 500 shares of " + symbol + " for {minute_open} each.")
+      update1.close()
 
-        print(f"Sherman bought 500 shares of " + symbol + " for {minute_open} each.")
-    ```        
+   print(f"Sherman bought 500 shares of " + symbol + " for {minute_open} each.")
+```        
    
    Change `500` to the qty you are buying and selling, you need to do this twice since there is an if statement with this, and an elif statement as well.
 
